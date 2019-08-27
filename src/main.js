@@ -8,6 +8,16 @@ import '@/styles/index.less'
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 
+// 导航守卫
+router.beforeEach((to, from, next) => {
+  let mytoken = localStorage.getItem('vue_manage_master_token')
+  if (mytoken || to.path === '/login') {
+    next()
+  } else {
+    next({ path: '/login' })
+  }
+})
+
 new Vue({
   router,
   render: h => h(App)
