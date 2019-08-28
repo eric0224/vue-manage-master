@@ -227,6 +227,7 @@ export default {
               if (res.data.meta.status === 201) {
                 this.$message.success(res.data.meta.msg)
                 this.init()
+                this.$refs.adduserform.resetFields()
                 this.addusersdialogFormVisible = false
               } else {
                 this.$message.error(res.data.meta.msg)
