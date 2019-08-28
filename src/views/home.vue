@@ -2,8 +2,9 @@
   <div class="home">
     <el-container>
       <el-aside width="200px">
-        <img src="@/assets/logo.png" class="logo" />
+        <img src="@/assets/girl.png" class="logo" />
         <el-menu
+          :router='true'
           :unique-opened='true'
           default-active="2"
           class="el-menu-vertical-demo"
@@ -16,7 +17,7 @@
               <i class="el-icon-location"></i>
               <span>用户管理</span>
             </template>
-            <el-menu-item index="1-1">
+            <el-menu-item index="/home/users">
               <template slot="title">
                 <i class="el-icon-menu"></i>
                 <span>用户列表</span>
@@ -85,8 +86,8 @@ export default {
     background-color: #545c64;
   }
   .logo {
-    height: 60px;
-    background: url(../assets/logo.png);
+    height: 205px;
+    background: url(../assets/girl.png);
     background-size: cover;
     background-color: #fff;
   }
