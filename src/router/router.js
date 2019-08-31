@@ -7,6 +7,7 @@ import Home from '@/views/home.vue'
 import Welcome from '@/views/welcome.vue'
 import Users from '@/views/user/users.vue'
 import Right from '@/views/right/right.vue'
+import Role from '@/views/right/role.vue'
 
 Vue.use(VueRouter)
 
@@ -39,9 +40,14 @@ export default new VueRouter({
           component: Users
         },
         {
-          name: 'right',
-          path: 'right',
+          name: 'rights',
+          path: 'rights',
           component: Right
+        },
+        {
+          name: 'roles',
+          path: 'roles',
+          component: Role
         }
       ]
     }

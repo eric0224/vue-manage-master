@@ -9,8 +9,6 @@ axios.interceptors.request.use(function (config) {
   let mytoken = localStorage.getItem('vue_manage_master_token')
   if (mytoken) {
     config.headers.Authorization = mytoken
-  } else {
-    this.$router.push({ name: 'login' })
   }
   return config
 }, function (error) {

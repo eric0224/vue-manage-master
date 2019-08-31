@@ -12,33 +12,15 @@
           text-color="#fff"
           active-text-color="#ffd04b"
         >
-          <el-submenu index="1">
+          <el-submenu :index="item.id+''" v-for="item in menuList" :key="item.id">
             <template slot="title">
               <i class="el-icon-location"></i>
-              <span>用户管理</span>
+              <span>{{item.authName}}</span>
             </template>
-            <el-menu-item index="/home/users">
+            <el-menu-item :index="'/home/'+items.path" v-for="items in item.children" :key="items.id">
               <template slot="title">
                 <i class="el-icon-menu"></i>
-                <span>用户列表</span>
-              </template>
-            </el-menu-item>
-          </el-submenu>
-          <el-submenu index="2">
-            <template slot="title">
-              <i class="el-icon-location"></i>
-              <span>权限管理</span>
-            </template>
-            <el-menu-item index="/home/right">
-              <template slot="title">
-                <i class="el-icon-menu"></i>
-                <span>权限列表</span>
-              </template>
-            </el-menu-item>
-            <el-menu-item index="2-2">
-              <template slot="title">
-                <i class="el-icon-menu"></i>
-                <span>角色列表</span>
+                <span>{{items.authName}}</span>
               </template>
             </el-menu-item>
           </el-submenu>
@@ -48,7 +30,7 @@
         <el-header>
           <span class="myicon-menu toggle-btn"></span>
           <h2 class="system-title">电商后台管理系统</h2>
-          <a href="javascript:;" class="welcome">退出</a>
+          <a href="javascript:;" class="welcome" @click="quitBtn">退出</a>
         </el-header>
         <el-main>
           <router-view></router-view>
@@ -59,9 +41,29 @@
 </template>
 
 <script>
+import { leftMenuRight } from '@/api/right_index.js'
 export default {
   data () {
-    return {}
+    return {
+      menuList: []
+    }
+  },
+  methods: {
+    quitBtn () {
+      this.$router.push({ name: 'login' })
+    }
+  },
+  mounted () {
+    leftMenuRight()
+      .then(res => {
+        // console.log(res)
+        if (res.data.meta.status === 200) {
+          this.menuList = res.data.data
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 }
 </script>
